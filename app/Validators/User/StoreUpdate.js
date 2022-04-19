@@ -11,9 +11,9 @@ class StoreUpdate {
     return {
       name: 'required|max:255',
       email: 'required|email|max:255|unique:users,email' + (updating ? `,id,${id}` : ''),
-      password: 'max:100' + (updating ? '' : 'required'),
-      role: `required|in:${Config.get('elvira.admin_role_id')},${Config.get('elvira.teacher_role_id')},${Config.get(
-        'elvira.user_role_id'
+      password: 'max:100' +'|'+ (updating ? '' : 'required'),
+      role: `required|in:${Config.get('baseValueExports.admin_role_id')},${Config.get(
+        'baseValueExports.user_role_id'
       )}`,
     }
   }
@@ -25,7 +25,6 @@ class StoreUpdate {
     const role = GetHeaderLang.setLanguage(request, 'labels.role')
 
     const superadmin = GetHeaderLang.setLanguage(request, 'labels.superAdmin')
-    const teacher = GetHeaderLang.setLanguage(request, 'labels.teacher')
     const user = GetHeaderLang.setLanguage(request, 'labels.user')
 
     return {
@@ -54,7 +53,7 @@ class StoreUpdate {
       }),
       'role.in': GetHeaderLang.setLanguageProps(request, 'validations.in', {
         name: role,
-        in: `${superadmin} - ${teacher} - ${user}`,
+        in: `${superadmin} - ${user}`,
       }),
     }
   }

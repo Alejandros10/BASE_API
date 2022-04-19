@@ -46,11 +46,11 @@ class UserController {
     const role = request.input('role')
 
     switch (auth.user.role) {
-      case Config.get('elvira.admin_role_id'):
+      case Config.get('baseValueExports.admin_role_id'):
         allow = true
         break
-      case Config.get('elvira.user_role_id'):
-        allow = role === Config.get('elvira.user_role_id')
+      case Config.get('baseValueExports.user_role_id'):
+        allow = role === Config.get('baseValueExports.user_role_id')
         break
     }
 

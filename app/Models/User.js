@@ -64,8 +64,11 @@ class User extends Model {
       name,
       email,
       password,
-      role,is_revoked,code,
+      role,
+      is_revoked,
+      code,
     }
+    console.log(store);
 
     try {
       const result = await this.create(store, trx)

@@ -13,10 +13,6 @@ class AuthController {
     switch (authUser.role) {
       case Config.get('elvira.admin_role_id'):
         allow = true
-        break
-      case Config.get('elvira.teacher_role_id'):
-        allow = role === Config.get('elvira.teacher_role_id') || Config.get('elvira.user_role_id')
-        break
       case Config.get('elvira.user_role_id'):
         allow = role === Config.get('elvira.user_role_id')
         break

@@ -25,7 +25,7 @@ class User extends Model {
   }
 
   static get visible() {
-    return ['id', 'role', 'name', 'email']
+    return ['id', 'role', 'name', 'email','is_revoked','code']
   }
 
   static get hidden() {
@@ -47,23 +47,24 @@ class User extends Model {
   }
 
   static scopeValidRoles(query, user) {
-    if (user.isTeacher()) {
-      return query.whereIn('role', [Config.get('elvira.teacher_role_id'), Config.get('elvira.user_role_id')])
-    } else if (user.isStudent()) {
+    /* change isUser for new role */
+    if (user.isUser()) {
+      return query.whereIn('role', [/* Config.get('baseValueExports.role_role_id'),  */Config.get('baseValueExports.user_role_id')])
+    } else if (user.isUser()) {
       return query.where('id', user.id)
     }
 
     return query
   }
 
-  static async registerData({ name, email, password, role }) {
+  static async registerData({ name, email, password, role,is_revoked,code }) {
     let res = false
     const trx = await Database.beginTransaction()
     const store = {
       name,
       email,
       password,
-      role,
+      role,is_revoked,code,
     }
 
     try {
@@ -79,15 +80,11 @@ class User extends Model {
   }
 
   isAdmin() {
-    return this.role === Config.get('elvira.admin_role_id')
+    return this.role === Config.get('baseValueExports.admin_role_id')
   }
 
-  isTeacher() {
-    return this.role === Config.get('elvira.teacher_role_id')
-  }
-
-  isStudent() {
-    return this.role === Config.get('elvira.user_role_id')
+  isUser() {
+    return this.role === Config.get('baseValueExports.user_role_id')
   }
 }
 

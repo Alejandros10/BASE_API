@@ -27,10 +27,4 @@ Route.group(() => {
   Route.delete('users/:id', 'UserController.destroy')
   Route.delete('users', 'UserController.massDestroy')
 
-  Route.get('virtualmachines', 'VirtualMachineController.index')
-  Route.post('virtualmachines', 'VirtualMachineController.store').validator('VirtualMachine/StoreUpdate')
-  Route.get('virtualmachines/:id', 'VirtualMachineController.show')
-  Route.put('virtualmachines/:id', 'VirtualMachineController.update').validator('VirtualMachine/StoreUpdate')
-  Route.delete('virtualmachines/:id', 'VirtualMachineController.destroy')
-  Route.delete('virtualmachines', 'VirtualMachineController.massDestroy')
 }).middleware('isUser')

@@ -49,9 +49,6 @@ class UserController {
       case Config.get('elvira.admin_role_id'):
         allow = true
         break
-      case Config.get('elvira.teacher_role_id'):
-        allow = role === Config.get('elvira.teacher_role_id') || Config.get('elvira.user_role_id')
-        break
       case Config.get('elvira.user_role_id'):
         allow = role === Config.get('elvira.user_role_id')
         break
@@ -113,6 +110,8 @@ class UserController {
       if (user) {
         user.name = request.input('name')
         user.email = request.input('email')
+        user.code = request.input('code')
+        user.is_revoked  = request.input('is_revoked')
         if (request.input('password')) {
           user.password = request.input('password')
         }

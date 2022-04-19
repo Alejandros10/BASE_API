@@ -16,9 +16,8 @@ class IsAdmin {
     await auth.check()
 
     if (
-      auth.user.role === Config.get('elvira.admin_role_id') ||
-      auth.user.role === Config.get('elvira.teacher_role_id') ||
-      auth.user.role === Config.get('elvira.user_role_id')
+      auth.user.role === Config.get('baseValueExports.admin_role_id') ||
+      auth.user.role === Config.get('baseValueExports.user_role_id')
     ) {
       // request.authUser = auth.user
       await next()

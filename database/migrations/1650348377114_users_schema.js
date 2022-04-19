@@ -3,28 +3,28 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 const Config = use('Config')
-
-class UserSchema extends Schema {
-  up() {
+class UsersSchema extends Schema {
+  up () {
     this.create('users', (table) => {
       table.increments()
       table
         .enu('role', [
-          Config.get('elvira.admin_role_id'),
-          Config.get('elvira.teacher_role_id'),
-          Config.get('elvira.user_role_id'),
+          Config.get('baseValueExports.admin_role_id'),
+          Config.get('baseValueExports.user_role_id'),
         ])
         .notNullable()
       table.string('name').nullable()
+      table.string('code').nullable().unique()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
+      table.boolean('is_revoked').defaultTo(false)
       table.timestamps()
     })
   }
 
-  down() {
+  down () {
     this.drop('users')
   }
 }
 
-module.exports = UserSchema
+module.exports = UsersSchema

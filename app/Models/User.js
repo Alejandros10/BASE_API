@@ -68,7 +68,6 @@ class User extends Model {
       is_revoked,
       code,
     }
-    console.log(store);
 
     try {
       const result = await this.create(store, trx)

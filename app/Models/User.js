@@ -68,7 +68,7 @@ class User extends Model {
       is_revoked,
       code,
     }
-
+ 
     try {
       const result = await this.create(store, trx)
       await trx.commit()

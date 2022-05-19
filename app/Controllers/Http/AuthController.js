@@ -17,12 +17,12 @@ class AuthController {
         break
     }
     try {
+      
       const user = await User.registerData(request.all())
       let accessToken
 
       if (user) {
         accessToken = await auth.generate(user)
-
         if (user !== undefined) {
           if (user) {
             await user.tokens().createMany([
